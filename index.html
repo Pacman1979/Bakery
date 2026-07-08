@@ -141,23 +141,27 @@
     display:flex; gap:16px; margin-top:32px; flex-wrap:wrap;
   }
   .hero-photo{
-    position:relative;
+    position:relative; /* overflow left visible so the badge can sit outside the frame */
+  }
+  .hero-photo-frame{
     border-radius:4px;
     overflow:hidden;
     box-shadow:var(--shadow);
   }
-  .hero-photo img{ height:520px; width:100%; object-fit:cover; }
+  .hero-photo-frame img{ height:520px; width:100%; object-fit:cover; }
   .award-badge{
     position:absolute;
-    width:190px;
-    top:-26px; right:-22px;
+    width:150px;
+    top:-24px; right:-24px;
     transform: rotate(6deg);
     border-radius:6px;
     overflow:hidden;
     box-shadow: 0 14px 30px -10px rgba(0,0,0,0.55);
     border:3px solid var(--rice);
+    background:var(--ink);
   }
-  @media (max-width:900px){ .award-badge{ width:150px; top:-18px; right:6px;} }
+  .award-badge img{ width:100%; height:auto; display:block; object-fit:contain; }
+  @media (max-width:900px){ .award-badge{ width:120px; top:-16px; right:0;} }
 
   section{ padding:84px 0; }
   .section-head{ max-width:640px; margin-bottom:44px; }
@@ -347,7 +351,9 @@
       </div>
     </div>
     <div class="hero-photo">
-      <img src="images/Shop.png" alt="Boulangerie Vietnam Artisan Bakery shopfront and display counter">
+      <div class="hero-photo-frame">
+        <img src="images/Shop.png" alt="Boulangerie Vietnam Artisan Bakery shopfront and display counter">
+      </div>
       <div class="award-badge">
         <img src="images/Best_Bakery.jpg" alt="2026 Winner — Best Bakery on the Gold Coast award">
       </div>
