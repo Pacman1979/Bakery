@@ -307,6 +307,13 @@
     background:#171310; color:#a99a85; padding:40px 0 28px; font-size:0.85rem;
   }
   .footer-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; align-items:center; }
+  .credit-bar{
+    margin-top:24px; padding-top:18px;
+    border-top:1px solid rgba(169,154,133,0.2);
+    text-align:center; font-size:0.78rem;
+  }
+  .credit-bar a{ opacity:0.65; transition:opacity .15s ease; }
+  .credit-bar a:hover{ opacity:1; color:var(--gold); }
   footer .brand .fr{ color:var(--rice); }
   .footer-links{ display:flex; gap:22px; }
   .footer-links a{ opacity:0.8; }
@@ -516,7 +523,10 @@
         </table>
         <h3 style="margin-top:26px;">Get in touch</h3>
         <p>0432 747 703</p>
-        <a href="https://www.facebook.com/profile.php?id=100086495847018" target="_blank" rel="noopener" class="btn gold" style="margin-top:14px;">Find us on Facebook</a>
+        <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:14px;">
+          <a href="https://www.facebook.com/profile.php?id=100086495847018" target="_blank" rel="noopener" class="btn gold">Find us on Facebook</a>
+          <a href="https://www.instagram.com/boulangerie_vietnam/" target="_blank" rel="noopener" class="btn ghost" style="border-color:rgba(251,243,230,0.5); color:var(--rice) !important;">Follow on Instagram</a>
+        </div>
       </div>
       <div class="map-frame">
         <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
@@ -538,7 +548,10 @@
       <a href="#menu">What We Bake</a>
       <a href="#visit">Visit Us</a>
     </div>
-    <div>© 2026 Boulangerie Vietnam Artisan Bakery. Voted Best Bakery on the Gold Coast.</div>
+    <div>© 2026 Boulangerie Vietnam Artisan Bakery</div>
+  </div>
+  <div class="wrap credit-bar">
+    <a href="https://studiovelox.com" target="_blank" rel="noopener">Website by Studio Velox</a>
   </div>
 </footer>
 
