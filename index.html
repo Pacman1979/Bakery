@@ -151,6 +151,7 @@
   .hero-photo-frame img{ height:520px; width:100%; object-fit:cover; }
   .award-badge{
     position:absolute;
+    display:block;
     width:150px;
     top:-24px; right:-24px;
     transform: rotate(6deg);
@@ -159,9 +160,33 @@
     box-shadow: 0 14px 30px -10px rgba(0,0,0,0.55);
     border:3px solid var(--rice);
     background:var(--ink);
+    transition: transform .2s ease;
   }
+  .award-badge:hover{ transform: rotate(6deg) scale(1.05); }
   .award-badge img{ width:100%; height:auto; display:block; object-fit:contain; }
-  @media (max-width:900px){ .award-badge{ width:120px; top:-16px; right:0;} }
+  @media (max-width:900px){ .award-badge{ width:110px; top:-14px; right:0;} }
+
+  .anzbake-badge{
+    position:absolute;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:2px;
+    width:128px; height:128px;
+    bottom:-20px; left:-20px;
+    transform: rotate(-8deg);
+    border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #2a231c, var(--ink) 70%);
+    border:3px solid var(--gold);
+    box-shadow: 0 14px 30px -10px rgba(0,0,0,0.55);
+    text-align:center;
+    padding:10px;
+    transition: transform .2s ease;
+  }
+  .anzbake-badge:hover{ transform: rotate(-8deg) scale(1.06); }
+  .anzbake-badge .ab-line1{ font-family:'Fraunces',serif; font-weight:600; font-size:0.82rem; color:var(--rice); line-height:1.1; }
+  .anzbake-badge .ab-line2{ font-family:'Fraunces',serif; font-weight:700; font-size:1.05rem; color:var(--gold); letter-spacing:0.03em; line-height:1.1; }
+  .anzbake-badge .ab-line3{ font-size:0.62rem; color:#e6dcc9; margin-top:3px; letter-spacing:0.02em; }
+  @media (max-width:900px){ .anzbake-badge{ width:96px; height:96px; bottom:-12px; left:0; padding:6px; }
+    .anzbake-badge .ab-line1{ font-size:0.66rem; } .anzbake-badge .ab-line2{ font-size:0.82rem; } .anzbake-badge .ab-line3{ font-size:0.52rem; } }
 
   section{ padding:84px 0; }
   .section-head{ max-width:640px; margin-bottom:44px; }
@@ -288,6 +313,34 @@
   .proof-item strong{ display:block; font-family:'Fraunces',serif; font-weight:600; }
   .proof-item span{ color:#54493e; font-size:0.94rem; }
 
+  .video-facade{
+    position:relative;
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    aspect-ratio:16/9;
+    background:#000;
+  }
+  .video-facade img{ width:100%; height:100%; object-fit:cover; opacity:0.82; }
+  .video-facade iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .vf-play{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:64px; height:64px; border-radius:50%;
+    background:var(--lacquer);
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    font-size:1.3rem; padding-left:4px;
+    box-shadow:0 10px 26px -8px rgba(0,0,0,0.6);
+    transition: transform .15s ease, background .15s ease;
+  }
+  .video-facade:hover .vf-play{ transform:translate(-50%,-50%) scale(1.08); background:var(--lacquer-deep); }
+  .vf-caption{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:12px 16px;
+    background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color:#fff; font-size:0.82rem; font-weight:500;
+  }
+
   /* VISIT / LOCATION */
   .visit{ background:var(--ink); color:var(--rice-dim); }
   .visit .eyebrow{ color:var(--gold); }
@@ -361,9 +414,14 @@
       <div class="hero-photo-frame">
         <img src="images/Shop.png" alt="Boulangerie Vietnam Artisan Bakery shopfront and display counter">
       </div>
-      <div class="award-badge">
+      <a href="#menu" class="award-badge" aria-label="See why locals keep coming back">
         <img src="images/Best_Bakery.jpg" alt="2026 Winner — Best Bakery on the Gold Coast award">
-      </div>
+      </a>
+      <a href="#anzbake" class="anzbake-badge" aria-label="Watch the 9 News ANZBake feature">
+        <span class="ab-line1">ANZBake 2024</span>
+        <span class="ab-line2">WINNER</span>
+        <span class="ab-line3">▶ As seen on 9&nbsp;News</span>
+      </a>
     </div>
   </div>
 </section>
@@ -399,6 +457,7 @@
       <span class="eyebrow">Meet the bakers</span>
       <h2>A Greek boy from Adelaide, a Vietnamese kitchen, and one very stubborn oven.</h2>
       <p>Jeremy grew up around food but not this food — that part came from Jenny, whose family recipes for bánh mì and rice paper rolls now sit on the same counter as his croissants and baguettes. Two very different food cultures, one shopfront in TreeTops, and a shared belief that "good enough" isn't.</p>
+      <p>In June 2024, Jeremy represented Australia at ANZBake, going head-to-head against New Zealand's best alongside teammates Tracy Nickl (Gumnut Patisserie) and Brad Burkitt (Terang Country Bakery). Australia took the trophy by a narrow margin — and 9 News Queensland came to Burleigh Waters to tell the story. <a href="#anzbake" style="color:var(--lacquer); font-weight:600;">Watch it below ↓</a></p>
       <blockquote>
         "We're not trying to be the fanciest bakery on the Coast. We just want every single thing on that shelf to be something we're proud to hand you."
         <span class="sign">— Jeremy &amp; Jenny, owners</span>
@@ -471,13 +530,21 @@
 </section>
 
 <!-- MORE REASONS / Component 7 & 8 — Social proof -->
-<section style="background:var(--rice-dim);">
+<section id="anzbake" style="background:var(--rice-dim);">
   <div class="wrap proof">
-    <img src="images/Best_Bakery.jpg" alt="2026 Winner Best Bakery on the Gold Coast award, sponsored by Triple M Gold 92.5 and Propell Property">
+    <div class="video-facade" data-yt="jvlsAftoJeo" role="button" tabindex="0" aria-label="Play the 9 News ANZBake feature on Boulangerie Vietnam">
+      <img src="https://img.youtube.com/vi/jvlsAftoJeo/hqdefault.jpg" alt="9 News Queensland feature on Jeremy's ANZBake 2024 win, click to play" loading="lazy">
+      <span class="vf-play" aria-hidden="true">▶</span>
+      <span class="vf-caption">9 News Queensland — "Bakers go head-to-head in the ultimate showdown"</span>
+    </div>
     <div>
       <span class="eyebrow">More reasons to stop by</span>
-      <h2 style="font-size:clamp(1.6rem,3vw,2.1rem); margin-top:10px;">This isn't a marketing claim — it's a 2026 community vote.</h2>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.1rem); margin-top:10px;">Represented Australia and won.</h2>
       <div class="proof-list">
+        <div class="proof-item">
+          <span class="dot"></span>
+          <div><strong>ANZBake 2024 champions</strong><span>In June 2024, Jeremy represented Australia against New Zealand's best at ANZBake, alongside Tracy Nickl (Gumnut Patisserie) and Brad Burkitt (Terang Country Bakery). Australia won by a narrow margin — and 9 News Queensland flew out to Burleigh Waters to cover it.</span></div>
+        </div>
         <div class="proof-item">
           <span class="dot"></span>
           <div><strong>Gold Coast's Best Bakery, 2026</strong><span>Awarded by Triple M Gold 92.5 and Propell Property — decided by local votes, not judges we chose ourselves.</span></div>
@@ -557,5 +624,25 @@
   </div>
 </footer>
 
+<script>
+  function playVideoFacade(el){
+    var id = el.getAttribute('data-yt');
+    el.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0" title="9 News ANZBake feature" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    var facade = document.querySelector('.video-facade');
+    if(!facade) return;
+    facade.addEventListener('click', function(){ playVideoFacade(facade); });
+    facade.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); playVideoFacade(facade); }
+    });
+    // Auto-play when someone arrives via the hero "ANZBake" badge link
+    function checkHashPlay(){
+      if(window.location.hash === '#anzbake'){ playVideoFacade(facade); }
+    }
+    window.addEventListener('hashchange', checkHashPlay);
+    checkHashPlay();
+  });
+</script>
 </body>
 </html>
