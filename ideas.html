@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Ideas — Boulangerie Vietnam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#221B15; --rice:#FBF3E6; --rice-dim:#F3E9D6;
+    --gold:#B8873B; --gold-deep:#8C6423; --lacquer:#8B2E28; --lacquer-deep:#6E211D;
+    --line: rgba(34,27,21,0.14); --cream-card:#FFFDF8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--rice); color:var(--ink);
+    font-family:'Work Sans', sans-serif; line-height:1.55;
+  }
+  h1,h2{ font-family:'Fraunces', serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  .script{ font-family:'Caveat', cursive; font-weight:700; }
+  .wrap{ max-width:760px; margin:0 auto; padding:0 24px 80px; }
+  a{ color:inherit; }
+
+  header{ padding:36px 0 10px; }
+  .back{ display:inline-block; font-size:0.85rem; color:var(--lacquer); font-weight:600; margin-bottom:18px; text-decoration:none; }
+  .back:hover{ text-decoration:underline; }
+  h1{ font-size:2rem; }
+  .sub{ font-family:'Caveat', cursive; font-size:1.3rem; color:var(--lacquer); margin-top:2px; }
+  p.lead{ margin-top:14px; color:#4a4038; max-width:56ch; }
+
+  form{
+    background:var(--cream-card); border:1px solid var(--line); border-radius:8px;
+    padding:22px; margin-top:28px; box-shadow:0 12px 30px -22px rgba(34,27,21,0.4);
+  }
+  label{ display:block; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:600; color:var(--gold-deep); margin-bottom:6px; }
+  input[type=text], textarea{
+    width:100%; padding:12px 14px; border-radius:6px; border:1px solid var(--line);
+    font-family:'Work Sans', sans-serif; font-size:0.98rem; background:#fff; color:var(--ink);
+    margin-bottom:16px; resize:vertical;
+  }
+  textarea{ min-height:90px; }
+  input:focus, textarea:focus{ outline:2px solid var(--gold); outline-offset:1px; }
+  button{
+    background:var(--lacquer); color:var(--rice); border:none; border-radius:6px;
+    padding:12px 26px; font-weight:600; font-size:0.95rem; cursor:pointer;
+    transition: background .15s ease;
+  }
+  button:hover{ background:var(--lacquer-deep); }
+  button:disabled{ opacity:0.6; cursor:default; }
+  .msg{ font-size:0.85rem; margin-top:10px; min-height:1.2em; }
+  .msg.error{ color:var(--lacquer); }
+  .msg.ok{ color:#3a6b3a; }
+
+  .list{ margin-top:40px; display:flex; flex-direction:column; gap:14px; }
+  .idea{
+    background:var(--cream-card); border:1px solid var(--line); border-radius:8px;
+    padding:16px 18px; position:relative;
+  }
+  .idea .meta{ font-size:0.78rem; color:var(--gold-deep); font-weight:600; margin-bottom:6px; display:flex; justify-content:space-between; gap:10px; align-items:baseline;}
+  .idea .txt{ white-space:pre-wrap; font-size:0.98rem; }
+  .idea .del{
+    background:none; border:none; color:#9a8c78; font-size:0.78rem; cursor:pointer;
+    padding:2px 6px; border-radius:4px; flex:none;
+  }
+  .idea .del:hover{ color:var(--lacquer); background:var(--rice-dim); }
+  .empty{ color:#8a7d6c; font-style:italic; margin-top:36px; text-align:center; }
+  .loading{ color:#8a7d6c; margin-top:36px; text-align:center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a href="/" class="back">← Back to the website</a>
+    <h1>Boulangerie Vietnam</h1>
+    <div class="sub">Ideas board</div>
+    <p class="lead">A running list for Phil, Jeremy &amp; Jenny — new menu items, marketing ideas, things to fix, anything worth remembering. Saves automatically and stays here for everyone.</p>
+  </header>
+
+  <form id="ideaForm">
+    <label for="author">Your name</label>
+    <input type="text" id="author" placeholder="Jeremy, Jenny, or Phil" maxlength="60">
+    <label for="text">Idea</label>
+    <textarea id="text" placeholder="Type your idea here..." maxlength="2000" required></textarea>
+    <button type="submit" id="submitBtn">Add idea</button>
+    <div class="msg" id="formMsg"></div>
+  </form>
+
+  <div id="list" class="list"></div>
+</div>
+
+<script>
+  const listEl = document.getElementById('list');
+  const form = document.getElementById('ideaForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formMsg = document.getElementById('formMsg');
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function timeAgo(iso){
+    const d = new Date(iso);
+    const diff = (Date.now() - d.getTime()) / 1000;
+    if (diff < 60) return "just now";
+    if (diff < 3600) return Math.floor(diff/60) + "m ago";
+    if (diff < 86400) return Math.floor(diff/3600) + "h ago";
+    if (diff < 2592000) return Math.floor(diff/86400) + "d ago";
+    return d.toLocaleDateString('en-AU', { day:'numeric', month:'short', year:'numeric' });
+  }
+
+  function renderIdeas(ideas){
+    if (!ideas.length){
+      listEl.innerHTML = '<div class="empty">No ideas yet — be the first to add one above.</div>';
+      return;
+    }
+    listEl.innerHTML = ideas.map(idea => `
+      <div class="idea" data-id="${idea.id}">
+        <div class="meta">
+          <span>${escapeHtml(idea.author)} · ${timeAgo(idea.created)}</span>
+          <button class="del" data-id="${idea.id}" aria-label="Delete this idea">Delete</button>
+        </div>
+        <div class="txt">${escapeHtml(idea.text)}</div>
+      </div>
+    `).join('');
+  }
+
+  async function loadIdeas(){
+    listEl.innerHTML = '<div class="loading">Loading ideas…</div>';
+    try{
+      const res = await fetch('/api/ideas');
+      const ideas = await res.json();
+      renderIdeas(ideas);
+    }catch(err){
+      listEl.innerHTML = '<div class="empty">Couldn\'t load ideas right now — try refreshing.</div>';
+    }
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const author = document.getElementById('author').value.trim();
+    const text = document.getElementById('text').value.trim();
+    if (!text) return;
+    submitBtn.disabled = true;
+    formMsg.textContent = '';
+    formMsg.className = 'msg';
+    try{
+      const res = await fetch('/api/ideas', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ author, text })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Something went wrong.');
+      document.getElementById('text').value = '';
+      formMsg.textContent = 'Idea added!';
+      formMsg.className = 'msg ok';
+      loadIdeas();
+    }catch(err){
+      formMsg.textContent = err.message || 'Could not save that idea — try again.';
+      formMsg.className = 'msg error';
+    }finally{
+      submitBtn.disabled = false;
+    }
+  });
+
+  listEl.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.del');
+    if (!btn) return;
+    const id = btn.getAttribute('data-id');
+    if (!confirm('Delete this idea?')) return;
+    btn.disabled = true;
+    try{
+      const res = await fetch('/api/ideas', {
+        method: 'DELETE',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ id })
+      });
+      if (!res.ok) throw new Error();
+      loadIdeas();
+    }catch(err){
+      alert('Could not delete that idea — try again.');
+      btn.disabled = false;
+    }
+  });
+
+  loadIdeas();
+</script>
+</body>
+</html>
