@@ -124,6 +124,18 @@
     align-items:center;
   }
   @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .star-rating{
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top:10px;
+    text-decoration:none;
+    font-size:0.88rem;
+    color:var(--ink);
+    transition: opacity .15s ease;
+  }
+  .star-rating:hover{ opacity:0.75; }
+  .star-rating .stars, .star-rating .star-half{ color:var(--gold); font-size:1rem; letter-spacing:1px; }
+  .star-rating .star-half{ opacity:0.55; }
+  .star-rating .star-text{ font-weight:600; color:#3a3128; border-bottom:1px solid var(--line); }
   .hero h1{
     font-size:clamp(2.3rem, 4.4vw, 3.5rem);
     margin-top:14px;
@@ -401,6 +413,10 @@
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow">Burleigh Waters · Gold Coast</span>
+      <a href="https://www.google.com/maps/place/?q=place_id:ChIJSw19LWEDkWsRzaVjrb8o08s" target="_blank" rel="noopener" class="star-rating">
+        <span class="stars">★★★★</span><span class="star-half">★</span>
+        <span class="star-text">4.4 on Google · 70 reviews</span>
+      </a>
       <h1>Tired of bread that tastes like it came from a warehouse? <em>So were we.</em></h1>
       <p class="sub">
         Most "fresh" bakeries are really just reheating trucked-in dough. Ours is different — mixed, proofed and baked from scratch every morning, the French way, with a Vietnamese soul stirred through every bánh mì, tart and croissant. It's why the Gold Coast just voted us its favourite bakery.
@@ -562,6 +578,9 @@
           <div><strong>Easy to find, easy to park</strong><span>Inside TreeTops Shopping Centre, Burleigh Waters — grab a coffee and browse the rest of the centre while you're there.</span></div>
         </div>
       </div>
+      <p style="margin-top:22px; font-size:0.95rem; color:#54493e;">
+        Had a great experience? <a href="https://search.google.com/local/writereview?placeid=ChIJSw19LWEDkWsRzaVjrb8o08s" target="_blank" rel="noopener" style="color:var(--lacquer); font-weight:600;">Leave us a quick review on Google →</a>
+      </p>
     </div>
   </div>
 </section>
@@ -595,6 +614,7 @@
         <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:14px;">
           <a href="https://www.facebook.com/profile.php?id=100086495847018" target="_blank" rel="noopener" class="btn gold">Find us on Facebook</a>
           <a href="https://www.instagram.com/boulangerie_vietnam/" target="_blank" rel="noopener" class="btn ghost" style="border-color:rgba(251,243,230,0.5); color:var(--rice) !important;">Follow on Instagram</a>
+          <a href="https://search.google.com/local/writereview?placeid=ChIJSw19LWEDkWsRzaVjrb8o08s" target="_blank" rel="noopener" class="btn ghost" style="border-color:rgba(251,243,230,0.5); color:var(--rice) !important;">Leave us a review</a>
         </div>
       </div>
       <div class="map-frame">
@@ -611,6 +631,7 @@
     <div class="brand">
       <span class="fr">Boulangerie Vietnam</span>
       <span class="vn">Artisan Bakery — Burleigh Waters</span>
+      <a href="https://www.google.com/maps/place/?q=place_id:ChIJSw19LWEDkWsRzaVjrb8o08s" target="_blank" rel="noopener" style="font-size:0.78rem; color:var(--gold); margin-top:6px; text-decoration:none;">★ 4.4 on Google (70 reviews)</a>
     </div>
     <div class="footer-links">
       <a href="#story">Our Story</a>
