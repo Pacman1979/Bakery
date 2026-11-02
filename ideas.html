@@ -1,191 +1,327 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-AU">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>Ideas — Boulangerie Vietnam</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Ideas &amp; requests — Boulangerie Vietnam Bakery</title>
+<!--
+  ===========================================================================
+  DROP-IN IDEAS PAGE  —  copy this to a client site as /ideas.html
+  ===========================================================================
+  Two things to change per client, both on the next line. Nothing else.
+
+    KEY  the client's ideas_key  (public — it sits in this page's source)
+    The PIN is NOT in here. The client types it. That is the whole point:
+    this page is on a public website, so the key alone must grant nothing.
+
+  Everything is talked to studiovelox.com/api/client-ideas, which resolves
+  the client from the key and scopes every row by it. This page cannot ask
+  for another client's ideas because it has no way to name one.
+  ===========================================================================
+-->
+<script>var IDEAS_KEY = 'c5798e495195b06d34064fff6b57523c';</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#221B15; --rice:#FBF3E6; --rice-dim:#F3E9D6;
-    --gold:#B8873B; --gold-deep:#8C6423; --lacquer:#8B2E28; --lacquer-deep:#6E211D;
-    --line: rgba(34,27,21,0.14); --cream-card:#FFFDF8;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--rice); color:var(--ink);
-    font-family:'Work Sans', sans-serif; line-height:1.55;
-  }
-  h1,h2{ font-family:'Fraunces', serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
-  .script{ font-family:'Caveat', cursive; font-weight:700; }
-  .wrap{ max-width:760px; margin:0 auto; padding:0 24px 80px; }
-  a{ color:inherit; }
+:root{
+  --ink:#1b2430; --dim:#5d6b7e; --line:#dfe4ea; --bg:#f6f7f9; --card:#fff;
+  --accent:#1f6f5c; --accent2:#2d8a73; --warm:#b8860b;
+  --body:'Lato',sans-serif; --acc:'Oswald',sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);
+  font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto;padding:28px 18px 64px}
 
-  header{ padding:36px 0 10px; }
-  .back{ display:inline-block; font-size:0.85rem; color:var(--lacquer); font-weight:600; margin-bottom:18px; text-decoration:none; }
-  .back:hover{ text-decoration:underline; }
-  h1{ font-size:2rem; }
-  .sub{ font-family:'Caveat', cursive; font-size:1.3rem; color:var(--lacquer); margin-top:2px; }
-  p.lead{ margin-top:14px; color:#4a4038; max-width:56ch; }
+h1{font-family:var(--acc);font-weight:600;font-size:clamp(22px,4.5vw,30px);
+  letter-spacing:.02em;margin:0 0 6px}
+.lede{color:var(--dim);margin:0 0 26px;font-size:16px}
 
-  form{
-    background:var(--cream-card); border:1px solid var(--line); border-radius:8px;
-    padding:22px; margin-top:28px; box-shadow:0 12px 30px -22px rgba(34,27,21,0.4);
-  }
-  label{ display:block; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:600; color:var(--gold-deep); margin-bottom:6px; }
-  input[type=text], textarea{
-    width:100%; padding:12px 14px; border-radius:6px; border:1px solid var(--line);
-    font-family:'Work Sans', sans-serif; font-size:0.98rem; background:#fff; color:var(--ink);
-    margin-bottom:16px; resize:vertical;
-  }
-  textarea{ min-height:90px; }
-  input:focus, textarea:focus{ outline:2px solid var(--gold); outline-offset:1px; }
-  button{
-    background:var(--lacquer); color:var(--rice); border:none; border-radius:6px;
-    padding:12px 26px; font-weight:600; font-size:0.95rem; cursor:pointer;
-    transition: background .15s ease;
-  }
-  button:hover{ background:var(--lacquer-deep); }
-  button:disabled{ opacity:0.6; cursor:default; }
-  .msg{ font-size:0.85rem; margin-top:10px; min-height:1.2em; }
-  .msg.error{ color:var(--lacquer); }
-  .msg.ok{ color:#3a6b3a; }
+/* ---------- gate ---------- */
+#gate{background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:26px;max-width:380px;margin:40px auto}
+#gate h2{font-family:var(--acc);font-weight:500;font-size:15px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);margin:0 0 14px}
+input,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);
+  background:#fff;border:1.5px solid var(--line);border-radius:4px;padding:12px}
+input:focus,textarea:focus{outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(31,111,92,.15)}
+button{font-family:var(--acc);font-weight:500;font-size:15px;letter-spacing:.08em;
+  text-transform:uppercase;background:var(--accent);color:#fff;border:0;
+  border-radius:4px;padding:13px 22px;cursor:pointer}
+button:hover:not(:disabled){background:var(--accent2)}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible{outline:3px solid var(--warm);outline-offset:2px}
+.err{color:#9b2c1c;font-size:15px;margin:12px 0 0;min-height:1.2em}
 
-  .list{ margin-top:40px; display:flex; flex-direction:column; gap:14px; }
-  .idea{
-    background:var(--cream-card); border:1px solid var(--line); border-radius:8px;
-    padding:16px 18px; position:relative;
-  }
-  .idea .meta{ font-size:0.78rem; color:var(--gold-deep); font-weight:600; margin-bottom:6px; display:flex; justify-content:space-between; gap:10px; align-items:baseline;}
-  .idea .txt{ white-space:pre-wrap; font-size:0.98rem; }
-  .idea .del{
-    background:none; border:none; color:#9a8c78; font-size:0.78rem; cursor:pointer;
-    padding:2px 6px; border-radius:4px; flex:none;
-  }
-  .idea .del:hover{ color:var(--lacquer); background:var(--rice-dim); }
-  .empty{ color:#8a7d6c; font-style:italic; margin-top:36px; text-align:center; }
-  .loading{ color:#8a7d6c; margin-top:36px; text-align:center; }
+/* ---------- compose ---------- */
+.compose{background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:20px;margin:0 0 30px}
+.compose textarea{min-height:92px;resize:vertical}
+.row{display:flex;gap:10px;align-items:center;margin:12px 0 0;flex-wrap:wrap}
+.row input{flex:1 1 180px}
+select{width:100%;font:inherit;font-size:16px;color:var(--ink);background:#fff;
+  border:1.5px solid var(--line);border-radius:4px;padding:12px}
+select:focus{outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(31,111,92,.15)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 12px}
+@media(max-width:520px){.fields{grid-template-columns:1fr}}
+.lbl{display:block;font-family:var(--acc);font-weight:500;font-size:12px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:0 0 8px}
+/* Filters. The count sits in the button because an empty filter you can see
+   is better than one you click and find nothing behind. */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 18px}
+.filters .ft{font-family:var(--acc);font-weight:500;font-size:11px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-right:2px}
+.filters button{background:#fff;color:var(--dim);border:1.5px solid var(--line);
+  padding:7px 14px;font-size:12px}
+.filters button:hover{border-color:var(--accent);color:var(--accent);background:#fff}
+.filters button[aria-pressed="true"]{background:var(--accent);color:#fff;
+  border-color:var(--accent)}
+.cat{font-family:var(--acc);font-weight:500;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--warm)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* ---------- list ---------- */
+.idea{background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:16px 18px;margin:0 0 12px}
+.idea .meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+  font-size:13px;color:var(--dim);margin:0 0 7px}
+.chip{font-family:var(--acc);font-weight:500;font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;padding:2px 8px;border-radius:3px;
+  background:#eceff3;color:var(--dim)}
+.chip.new{background:#e7f1ee;color:var(--accent)}
+.chip.doing{background:#fdf2dc;color:#8a6500}
+.chip.done{background:#e3efe5;color:#2a6b36}
+.chip.no{background:#f2e7e5;color:#8a3c2e}
+.idea .body{margin:0;white-space:pre-wrap;font-size:16px}
+.reply{margin:14px 0 0;padding:12px 14px;border-left:3px solid var(--accent);
+  background:#f3f8f6;border-radius:0 4px 4px 0}
+.reply .who{font-family:var(--acc);font-weight:500;font-size:11px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+.reply p{margin:0;white-space:pre-wrap;font-size:15px}
+.empty{color:var(--dim);text-align:center;padding:36px 16px;font-size:16px}
+.hidden{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <a href="/" class="back">← Back to the website</a>
-    <h1>Boulangerie Vietnam</h1>
-    <div class="sub">Ideas board</div>
-    <p class="lead">A running list for Phil, Jeremy &amp; Jenny — new menu items, marketing ideas, things to fix, anything worth remembering. Saves automatically and stays here for everyone.</p>
-  </header>
 
-  <form id="ideaForm">
-    <label for="author">Your name</label>
-    <input type="text" id="author" placeholder="Jeremy, Jenny, or Phil" maxlength="60">
-    <label for="text">Idea</label>
-    <textarea id="text" placeholder="Type your idea here..." maxlength="2000" required></textarea>
-    <button type="submit" id="submitBtn">Add idea</button>
-    <div class="msg" id="formMsg"></div>
-  </form>
+  <!-- the gate -->
+  <div id="gate">
+    <h2>Ideas &amp; requests</h2>
+    <p style="margin:0 0 16px;color:var(--dim);font-size:15px">
+      Enter the PIN Phil gave you.</p>
+    <input id="pin" type="password" inputmode="numeric" autocomplete="off"
+           placeholder="PIN" aria-label="PIN">
+    <div class="row"><button id="enter" style="flex:1">Open</button></div>
+    <p class="err" id="gate-err" role="alert"></p>
+  </div>
 
-  <div id="list" class="list"></div>
+  <!-- the page -->
+  <div id="app" class="hidden">
+    <h1>Ideas &amp; requests</h1>
+    <p class="lede">Anything you want changed, added or fixed on your website.
+      Write it here and it reaches Phil the next morning.</p>
+
+    <div class="compose">
+      <div class="fields">
+        <div>
+          <label class="lbl" for="author">Your name</label>
+          <input id="author" type="text" maxlength="60" placeholder="Optional"
+                 autocomplete="given-name">
+        </div>
+        <div>
+          <label class="lbl" for="category">Category</label>
+          <select id="category">
+            <option value="website">Website</option>
+            <option value="events">Events</option>
+            <option value="marketing">Marketing</option>
+            <option value="services">Services</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      <label class="lbl" for="body">What would you like?</label>
+      <textarea id="body" maxlength="2000"
+        placeholder="Could we add the new treatment to the services page?"></textarea>
+      <div class="hp" aria-hidden="true">
+        <input id="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="row" style="justify-content:flex-end">
+        <button id="send">Send it</button>
+      </div>
+      <p class="err" id="send-err" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="filters" id="filters"></div>
+    <div id="list"></div>
+  </div>
 </div>
 
 <script>
-  const listEl = document.getElementById('list');
-  const form = document.getElementById('ideaForm');
-  const submitBtn = document.getElementById('submitBtn');
-  const formMsg = document.getElementById('formMsg');
+(function(){
+  var API = 'https://studiovelox.com/api/client-ideas';
+  var PINKEY = 'velox.ideas.pin';
+  var $ = function(id){ return document.getElementById(id); };
+  var pin = '';
 
-  function escapeHtml(s){
-    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
-  function timeAgo(iso){
-    const d = new Date(iso);
-    const diff = (Date.now() - d.getTime()) / 1000;
-    if (diff < 60) return "just now";
-    if (diff < 3600) return Math.floor(diff/60) + "m ago";
-    if (diff < 86400) return Math.floor(diff/3600) + "h ago";
-    if (diff < 2592000) return Math.floor(diff/86400) + "d ago";
-    return d.toLocaleDateString('en-AU', { day:'numeric', month:'short', year:'numeric' });
+  /* Remembered in this browser so the client types it once, not daily.
+     Wrapped because private windows make localStorage throw. */
+  function savedPin(){ try { return localStorage.getItem(PINKEY) || ''; } catch(e){ return ''; } }
+  function keepPin(v){ try { localStorage.setItem(PINKEY, v); } catch(e){} }
+  function dropPin(){ try { localStorage.removeItem(PINKEY); } catch(e){} }
+
+  function headers(){
+    return { 'Content-Type':'application/json',
+             'X-Ideas-Key': IDEAS_KEY, 'X-Ideas-Pin': pin };
   }
 
-  function renderIdeas(ideas){
+  function esc(s){
+    return String(s==null?'':s).replace(/[&<>"]/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; });
+  }
+
+  function when(iso){
+    if(!iso) return '';
+    var d = new Date(iso.replace(' ','T') + (/[Zz]|[+\-]\d\d:?\d\d$/.test(iso) ? '' : 'Z'));
+    if (isNaN(d)) return '';
+    return d.toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'});
+  }
+
+  var LABEL = { 'new':'Sent', seen:'Seen', doing:'In progress', done:'Done', no:'Not this time' };
+  var CATS  = ['website','events','marketing','services','other'];
+  var CATNAME = { website:'Website', events:'Events', marketing:'Marketing',
+                  services:'Services', other:'Other' };
+  var all = [];        /* everything the server sent */
+  var filter = 'all';  /* which category is showing */
+
+  /* Only offer a filter for a category that has something in it. A button
+     that leads to an empty list is a button that wastes a tap. */
+  function drawFilters(){
+    var counts = {};
+    all.forEach(function(i){
+      var c = i.category || 'other';
+      counts[c] = (counts[c] || 0) + 1;
+    });
+    var live = CATS.filter(function(c){ return counts[c]; });
+    if (live.length < 2){ $('filters').innerHTML = ''; return; }
+
+    $('filters').innerHTML = '<span class="ft">Show</span>'
+      + '<button type="button" data-cat="all" aria-pressed="' + (filter==='all') + '">'
+      +   'All (' + all.length + ')</button>'
+      + live.map(function(c){
+          return '<button type="button" data-cat="' + c + '" aria-pressed="'
+            + (filter===c) + '">' + CATNAME[c] + ' (' + counts[c] + ')</button>';
+        }).join('');
+  }
+
+  function show(){
+    drawFilters();
+    draw(filter === 'all'
+      ? all
+      : all.filter(function(i){ return (i.category || 'other') === filter; }));
+  }
+
+  $('filters').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-cat]');
+    if (!b) return;
+    filter = b.getAttribute('data-cat');
+    show();
+  });
+
+  function draw(ideas){
     if (!ideas.length){
-      listEl.innerHTML = '<div class="empty">No ideas yet — be the first to add one above.</div>';
+      $('list').innerHTML = '<p class="empty">Nothing yet. Your first idea goes above.</p>';
       return;
     }
-    listEl.innerHTML = ideas.map(idea => `
-      <div class="idea" data-id="${idea.id}">
-        <div class="meta">
-          <span>${escapeHtml(idea.author)} · ${timeAgo(idea.created)}</span>
-          <button class="del" data-id="${idea.id}" aria-label="Delete this idea">Delete</button>
-        </div>
-        <div class="txt">${escapeHtml(idea.text)}</div>
-      </div>
-    `).join('');
+    $('list').innerHTML = ideas.map(function(i){
+      var st = i.status || 'new';
+      return '<div class="idea">'
+        + '<div class="meta"><span class="chip ' + esc(st) + '">'
+        +   esc(LABEL[st] || st) + '</span>'
+        +   (i.category ? '<span class="cat">' + esc(CATNAME[i.category] || i.category)
+                        + '</span>' : '')
+        +   (i.author ? '<span>' + esc(i.author) + '</span>' : '')
+        +   '<span>' + esc(when(i.created_at)) + '</span></div>'
+        + '<p class="body">' + esc(i.body) + '</p>'
+        + (i.reply
+            ? '<div class="reply"><p class="who">Phil replied</p><p>'
+              + esc(i.reply) + '</p></div>'
+            : '')
+        + '</div>';
+    }).join('');
   }
 
-  async function loadIdeas(){
-    listEl.innerHTML = '<div class="loading">Loading ideas…</div>';
-    try{
-      const res = await fetch('/api/ideas');
-      const ideas = await res.json();
-      renderIdeas(ideas);
-    }catch(err){
-      listEl.innerHTML = '<div class="empty">Couldn\'t load ideas right now — try refreshing.</div>';
-    }
+  async function load(){
+    var r = await fetch(API, { headers: headers() });
+    var d = await r.json();
+    if (!d.ok) throw new Error(d.error || 'Could not load');
+    all = d.ideas || [];
+    show();
   }
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const author = document.getElementById('author').value.trim();
-    const text = document.getElementById('text').value.trim();
-    if (!text) return;
-    submitBtn.disabled = true;
-    formMsg.textContent = '';
-    formMsg.className = 'msg';
-    try{
-      const res = await fetch('/api/ideas', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ author, text })
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Something went wrong.');
-      document.getElementById('text').value = '';
-      formMsg.textContent = 'Idea added!';
-      formMsg.className = 'msg ok';
-      loadIdeas();
-    }catch(err){
-      formMsg.textContent = err.message || 'Could not save that idea — try again.';
-      formMsg.className = 'msg error';
-    }finally{
-      submitBtn.disabled = false;
+  async function enter(){
+    pin = $('pin').value.trim();
+    if (!pin) return;
+    $('enter').disabled = true;
+    $('gate-err').textContent = '';
+    try {
+      await load();
+      keepPin(pin);
+      $('gate').classList.add('hidden');
+      $('app').classList.remove('hidden');
+    } catch (err) {
+      dropPin();
+      $('gate-err').textContent = err.message;
+      $('pin').value = '';
     }
+    $('enter').disabled = false;
+  }
+
+  $('enter').addEventListener('click', enter);
+  $('pin').addEventListener('keydown', function(e){ if(e.key==='Enter') enter(); });
+
+  $('send').addEventListener('click', async function(){
+    var body = $('body').value.trim();
+    if (!body){ $('send-err').textContent = 'Write something first.'; return; }
+    $('send').disabled = true;
+    $('send-err').textContent = '';
+    try {
+      var r = await fetch(API, {
+        method:'POST', headers: headers(),
+        body: JSON.stringify({ body: body,
+                               author: $('author').value.trim(),
+                               category: $('category').value,
+                               website: $('website').value })
+      });
+      var d = await r.json();
+      if (!d.ok) throw new Error(d.error || 'Could not send');
+      $('body').value = '';
+      all = d.ideas || [];
+      show();
+      $('send-err').style.color = '#1f6f5c';
+      $('send-err').textContent = 'Sent. Phil sees this tomorrow morning.';
+    } catch (err) {
+      $('send-err').style.color = '#9b2c1c';
+      $('send-err').textContent = err.message;
+    }
+    $('send').disabled = false;
   });
 
-  listEl.addEventListener('click', async (e) => {
-    const btn = e.target.closest('.del');
-    if (!btn) return;
-    const id = btn.getAttribute('data-id');
-    if (!confirm('Delete this idea?')) return;
-    btn.disabled = true;
-    try{
-      const res = await fetch('/api/ideas', {
-        method: 'DELETE',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ id })
-      });
-      if (!res.ok) throw new Error();
-      loadIdeas();
-    }catch(err){
-      alert('Could not delete that idea — try again.');
-      btn.disabled = false;
-    }
-  });
-
-  loadIdeas();
+  /* Straight in if this browser already knows the PIN. */
+  var remembered = savedPin();
+  if (remembered){
+    pin = remembered;
+    load().then(function(){
+      $('gate').classList.add('hidden');
+      $('app').classList.remove('hidden');
+    }).catch(function(){ dropPin(); pin = ''; });
+  }
+})();
 </script>
 </body>
 </html>
